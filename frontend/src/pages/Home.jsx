@@ -6,8 +6,6 @@ const Home = () => {
       <HomePosts />
       <HomePosts />
       <HomePosts />
-      <HomePosts />
-      <HomePosts />
     </div>
   );
 };
