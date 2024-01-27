@@ -4,7 +4,7 @@ import { IoSearch } from "react-icons/io5";
 const Navbar = () => {
   const user = false;
   return (
-    <div className="flex items-center justify-between px-6 md:px-[200px] py-4 ">
+    <div className="flex items-center justify-between px-6 md:px-[200px] py-4 font-family-poppins ">
       <h1 className="text-xl font-extrabold">
         <Link to="/">Blog Market</Link>
       </h1>

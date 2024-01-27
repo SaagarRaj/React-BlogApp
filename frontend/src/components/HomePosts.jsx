@@ -1,6 +1,6 @@
 const HomePosts = () => {
   return (
-    <div className="w-full flex mt-10 space-x-4">
+    <div className="w-full flex mt-10 space-x-4 font-poppins font-thin">
       {/** Left Div*/}
       <div className="w-[35%] h-[250px] flex justify-center items-center">
         <img
