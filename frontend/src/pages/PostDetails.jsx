@@ -31,6 +31,7 @@ function PostDetails() {
           src="https://googlechrome.github.io/samples/picture-element/images/kitten-large.png"
           className="w-[80%] mx-auto mt-8"
           alt=""
+          loading="lazy"
         />
         <p className="mx-auto mt-8  font-thin">
           {" "}
