@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import PostDetails from "./pages/PostDetails";
 import CreatePost from "./pages/CreatePost";
 import EditPosts from "./pages/EditPosts";
+import Profile from "./pages/Profile";
 export default function App() {
   return (
     <div>
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/write" element={<CreatePost />} />
         <Route path="/edit/:id" element={<EditPosts />} />
         <Route path="/posts/post/:id" element={<PostDetails />} />
+        <Route path="/profile/:id" element={<Profile />} />
       </Routes>
     </div>
   );
