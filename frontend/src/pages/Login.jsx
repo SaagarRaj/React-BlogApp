@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 export default function Login() {
   return (
     <>
@@ -34,6 +35,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
