@@ -3,6 +3,7 @@ const express = require("express");
 const { default: mongoose } = require("mongoose");
 const app = express();
 require("dotenv").config();
+const authRouter = require("./Routes/auth");
 
 // Database
 const connectDB = async () => {
@@ -13,6 +14,10 @@ const connectDB = async () => {
     console.log(error);
   }
 };
+
+// Middleware
+app.use(express.json());
+app.use("/api/auth", authRouter);
 
 app.listen(process.env.PORT, () => {
   connectDB();
