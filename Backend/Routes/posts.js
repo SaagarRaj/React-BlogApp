@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
-const User = require("../Models/User");
+
 const Post = require("../Models/Post");
-const Comment = require("../Models/Comment");
+
+const verifyToken = require("../verifyToken");
 
 // Create
 
-router.post("/create", async (req, res) => {
+router.post("/create", verifyToken, async (req, res) => {
   try {
     const newPost = new Post(req.body);
     const savedPost = await newPost.save();
@@ -18,7 +18,7 @@ router.post("/create", async (req, res) => {
 });
 
 // UPDATE
-router.put("/:id", async (req, res) => {
+router.put("/:id", verifyToken, async (req, res) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id, // The ID of the user we want to update
@@ -32,7 +32,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", verifyToken, async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
     res.status(200).json("Post has been deleted ");
