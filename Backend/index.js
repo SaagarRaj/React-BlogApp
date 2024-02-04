@@ -6,6 +6,7 @@ require("dotenv").config();
 const authRoute = require("./Routes/auth");
 const userRoute = require("./Routes/users");
 const postRoute = require("./Routes/posts");
+const commentRoute = require("./Routes/comments");
 // Database
 const connectDB = async () => {
   try {
@@ -21,6 +22,8 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/posts", postRoute);
+app.use("/api/comments", commentRoute);
+
 app.listen(process.env.PORT, () => {
   connectDB();
   console.log(`App is running on port :${process.env.PORT}`);

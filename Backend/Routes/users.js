@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const User = require("../Models/User");
 const Post = require("../Models/Post");
 const Comment = require("../Models/Comment");
+
 // UPDATE
 router.put("/:id", async (req, res) => {
   try {
