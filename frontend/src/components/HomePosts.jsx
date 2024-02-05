@@ -5,7 +5,7 @@ const HomePosts = () => {
       <div className="w-[35%] h-[250px] flex justify-center items-center">
         <img
           alt=""
-          src="https://googlechrome.github.io/samples/picture-element/images/kitten-large.png"
+          src="https://images.pexels.com/photos/13398438/pexels-photo-13398438.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
           className="h-full w-full object-cover"
         />
       </div>

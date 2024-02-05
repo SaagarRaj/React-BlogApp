@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
-
+import { FaBars } from "react-icons/fa6";
+import { useState } from "react";
+import Menu from "./Menu";
 const Navbar = () => {
-  const user = false;
+  const [menu, setMenu] = useState(false);
+  const user = true;
+
+  const showMenu = () => {
+    setMenu(!menu);
+  };
   return (
     <div className="flex items-center justify-between px-6 md:px-[200px] py-4 font-family-poppins ">
       <h1 className="text-xl font-extrabold">
@@ -18,7 +25,9 @@ const Navbar = () => {
           type="text"
         />
       </div>
-      <div className="flex items-center justify-center space-x-2 md:space-x-4 ">
+      <div className="hidden md:flex items-center justify-center space-x-2 md:space-x-4 ">
+        {" "}
+        {/* on medium screen the display is set to flex from hidden  */}
         {user ? (
           <h3>
             <Link to="/write">Write</Link>
@@ -30,14 +39,23 @@ const Navbar = () => {
           </h3>
         )}
         {user ? (
-          <h3>
-            <Link to="/profile">Profile</Link>
-          </h3>
+          <div onClick={showMenu}>
+            <p className="cursor-pointer relative">
+              <FaBars />
+            </p>
+            {menu && <Menu />}
+          </div>
         ) : (
           <h3>
             <Link to="/register">Register</Link>
           </h3>
         )}
+      </div>
+      <div onClick={showMenu} className="md:hidden text-lg">
+        <p className="cursor-pointer relative">
+          <FaBars />
+        </p>
+        {menu && <Menu />}
       </div>
     </div>
   );
