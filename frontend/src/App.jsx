@@ -6,9 +6,11 @@ import PostDetails from "./pages/PostDetails";
 import CreatePost from "./pages/CreatePost";
 import EditPosts from "./pages/EditPosts";
 import Profile from "./pages/Profile";
+import { UserContextProvider } from "./context/UserContext";
+
 export default function App() {
   return (
-    <div>
+    <UserContextProvider>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -18,6 +20,6 @@ export default function App() {
         <Route path="/posts/post/:id" element={<PostDetails />} />
         <Route path="/profile/:id" element={<Profile />} />
       </Routes>
-    </div>
+    </UserContextProvider>
   );
 }

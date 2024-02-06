@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { FaBars } from "react-icons/fa6";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Menu from "./Menu";
+import { UserContext } from "../context/UserContext";
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
-  const user = true;
-
+  const { user } = useContext(UserContext);
+  //console.log(user);
   const showMenu = () => {
     setMenu(!menu);
   };

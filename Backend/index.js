@@ -9,6 +9,7 @@ const authRoute = require("./Routes/auth");
 const userRoute = require("./Routes/users");
 const postRoute = require("./Routes/posts");
 const commentRoute = require("./Routes/comments");
+const cors = require("cors");
 
 // Database
 const connectDB = async () => {
@@ -22,6 +23,7 @@ const connectDB = async () => {
 
 // Middleware
 app.use(express.json());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/posts", postRoute);
