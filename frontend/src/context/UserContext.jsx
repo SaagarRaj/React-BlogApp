@@ -3,6 +3,7 @@ import { Url } from "../Url";
 import axios from "axios";
 export const UserContext = createContext({});
 
+// eslint-disable-next-line react/prop-types
 export function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
   useEffect(() => {

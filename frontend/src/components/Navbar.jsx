@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { FaBars } from "react-icons/fa6";
 import { useContext, useState } from "react";
@@ -6,21 +6,29 @@ import Menu from "./Menu";
 import { UserContext } from "../context/UserContext";
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
+  const [prompt, setPrompt] = useState("");
   const { user } = useContext(UserContext);
+  const Navigate = useNavigate();
+
   //console.log(user);
   const showMenu = () => {
     setMenu(!menu);
   };
+  console.log(prompt);
   return (
     <div className="flex items-center justify-between px-6 md:px-[200px] py-4 font-family-poppins ">
       <h1 className="text-xl font-extrabold">
         <Link to="/">Blog Market</Link>
       </h1>
       <div className="flex justify-center items-center space-x-0">
-        <p>
+        <p
+          onClick={() => Navigate(prompt ? "?search=" + prompt : Navigate("/"))}
+          className="cursor-pointer"
+        >
           <IoSearch />
         </p>
         <input
+          onChange={(e) => setPrompt(e.target.value)}
           className="outline-none px-3 "
           placeholder="Search a post"
           type="text"
