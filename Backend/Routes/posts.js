@@ -6,14 +6,13 @@ const Post = require("../Models/Post");
 const verifyToken = require("../verifyToken");
 
 // Create
-
 router.post("/create", verifyToken, async (req, res) => {
   try {
     const newPost = new Post(req.body);
     const savedPost = await newPost.save();
     res.status(200).json(savedPost);
   } catch (error) {
-    res.send(500).json(error);
+    res.status(500).json(error);
   }
 });
 
@@ -21,11 +20,11 @@ router.post("/create", verifyToken, async (req, res) => {
 router.put("/:id", verifyToken, async (req, res) => {
   try {
     const updatedPost = await Post.findByIdAndUpdate(
-      req.params.id, // The ID of the user we want to update
-      { $set: req.body }, // The update to be applied, using $set to update specific fields
-      { new: true } // Options: Return the modified document instead of the original one
+      req.params.id,
+      { $set: req.body },
+      { new: true }
     );
-    res.status(200).json(updatedPost);
+    res.sendStatus(200).json(updatedPost);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -35,7 +34,7 @@ router.put("/:id", verifyToken, async (req, res) => {
 router.delete("/:id", verifyToken, async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
-    res.status(200).json("Post has been deleted ");
+    res.sendStatus(200).json("Post has been deleted ");
   } catch (error) {
     res.status(500).json(error);
   }
@@ -76,5 +75,5 @@ router.get("/user/:userId", async (req, res) => {
   }
 });
 
-//EXPORT
+// EXPORT
 module.exports = router;
