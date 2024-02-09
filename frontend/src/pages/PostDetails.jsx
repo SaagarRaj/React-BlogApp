@@ -18,6 +18,8 @@ function PostDetails() {
   const postId = useParams().id;
   const [post, setPost] = useState({});
   const [loader, setLoader] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [comment, setComment] = useState("");
   //console.log(postId);
   const { user } = useContext(UserContext);
 
@@ -33,9 +35,22 @@ function PostDetails() {
       setLoader(true);
     }
   };
-
   useEffect(() => {
     fetchPost();
+  }, [postId]);
+
+  const fetchPostComments = async () => {
+    try {
+      const res = await axios.get(Url + "/api/comments/post/" + postId);
+      setComments(res.data);
+    } catch (error) {
+      setLoader(true);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPostComments();
   }, [postId]);
 
   //delete
@@ -50,6 +65,31 @@ function PostDetails() {
       console.log(err);
     }
   };
+
+  // Post Comment
+  const postComment = async (e) => {
+    e.preventDefault();
+    try {
+      // eslint-disable-next-line no-unused-vars
+      const res = await axios.post(
+        Url + "/api/comments/create",
+        {
+          comment: comment,
+          author: user.username,
+          postId: postId,
+          userId: user._id,
+        },
+        { withCredentials: true }
+      );
+
+      // fetchPostComments();
+      // setComment("");
+      window.location.reload(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="font-popins">
       <Navbar />
@@ -106,21 +146,24 @@ function PostDetails() {
           <div className="flex flex-col ">
             <h3 className="mt-6 mb-4 font-semibold ">Comments:</h3>
             {/* Comments */}
-            <Comment />
-            {/* Comments */}
-            <Comment />
-            {/* Comments */}
-            <Comment />
+
+            {comments?.map((c) => (
+              <Comment key={c._id} c={c} post={post} />
+            ))}
           </div>
 
           {/* Write a comment  */}
           <div className="flex w-full flex-col mt-4 md:flex-row ">
             <input
+              onChange={(e) => setComment(e.target.value)}
               className="md:w-[80%]  outline-none px-4 mt-4 md:mt-0"
               type="text"
               placeholder="Write a comment"
             />
-            <button className="bg-black text-sm text-white px-4 py-2 md:w-[20%] md:mt-0 ">
+            <button
+              onClick={postComment}
+              className="bg-black text-sm text-white px-4 py-2 md:w-[20%] md:mt-0 "
+            >
               {" "}
               Add comment
             </button>

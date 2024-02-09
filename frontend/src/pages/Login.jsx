@@ -21,9 +21,9 @@ export default function Login() {
         },
         { withCredentials: true }
       );
-      console.log(res.data);
+      //console.log(res.data);
       setUser(res.data);
-      setError(false);
+
       navigate("/");
     } catch (error) {
       setError(true);

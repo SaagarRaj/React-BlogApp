@@ -50,10 +50,10 @@ router.get("/logout", async (req, res) => {
   try {
     res
       .clearCookie("token", { sameSite: "none", secure: true })
-      .sendStatus(200)
+      .status(200)
       .send("User Logged out successfully");
   } catch (error) {
-    res.sendStatus(500).json(error);
+    res.status(500).json(error);
   }
 });
 

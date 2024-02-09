@@ -12,8 +12,8 @@ router.post("/create", verifyToken, async (req, res) => {
     const newComment = new Comment(req.body);
     const savedComment = await newComment.save();
     res.status(200).json(savedComment);
-  } catch (error) {
-    res.send(500).json(error);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
