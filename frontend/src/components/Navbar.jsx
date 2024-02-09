@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { FaBars } from "react-icons/fa6";
 import { useContext, useState } from "react";
@@ -9,6 +9,8 @@ const Navbar = () => {
   const [prompt, setPrompt] = useState("");
   const { user } = useContext(UserContext);
   const Navigate = useNavigate();
+  // to get url/Pathname
+  const path = useLocation().pathname;
 
   //console.log(user);
   const showMenu = () => {
@@ -20,20 +22,24 @@ const Navbar = () => {
       <h1 className="text-xl font-extrabold">
         <Link to="/">Blog Market</Link>
       </h1>
-      <div className="flex justify-center items-center space-x-0">
-        <p
-          onClick={() => Navigate(prompt ? "?search=" + prompt : Navigate("/"))}
-          className="cursor-pointer"
-        >
-          <IoSearch />
-        </p>
-        <input
-          onChange={(e) => setPrompt(e.target.value)}
-          className="outline-none px-3 "
-          placeholder="Search a post"
-          type="text"
-        />
-      </div>
+      {path === "/" && (
+        <div className="flex justify-center items-center space-x-0">
+          <p
+            onClick={() =>
+              Navigate(prompt ? "?search=" + prompt : Navigate("/"))
+            }
+            className="cursor-pointer"
+          >
+            <IoSearch />
+          </p>
+          <input
+            onChange={(e) => setPrompt(e.target.value)}
+            className="outline-none px-3 "
+            placeholder="Search a post"
+            type="text"
+          />
+        </div>
+      )}
       <div className="hidden md:flex items-center justify-center space-x-2 md:space-x-4 ">
         {" "}
         {/* on medium screen the display is set to flex from hidden  */}

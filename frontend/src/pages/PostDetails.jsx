@@ -1,21 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import axios from "axios";
+import Comment from "../components/Comment";
 import { BiEdit } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import Comment from "../components/Comment";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { Url } from "../Url";
+
+import { useNavigate, useParams } from "react-router-dom";
+
+import { Url, ImageFolder } from "../Url";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import Loader from "../components/Loader";
+
 function PostDetails() {
+  const navigate = useNavigate();
   const postId = useParams().id;
   const [post, setPost] = useState({});
   const [loader, setLoader] = useState(false);
-  console.log(postId);
+  //console.log(postId);
   const { user } = useContext(UserContext);
+
   const fetchPost = async () => {
     setLoader(true);
     try {
@@ -33,6 +38,18 @@ function PostDetails() {
     fetchPost();
   }, [postId]);
 
+  //delete
+  const handleDeletePost = async () => {
+    try {
+      const res = await axios.delete(Url + "/api/posts/" + postId, {
+        withCredentials: true,
+      });
+      console.log(res.data);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="font-popins">
       <Navbar />
@@ -48,11 +65,14 @@ function PostDetails() {
             </h1>
             {/* post button div */}
             {user?._id === post?.userId && (
-              <div className="flex items-center justify-center space-x-2 ">
-                <p>
+              <div className="flex items-center justify-center space-x-2">
+                <p
+                  className="cursor-pointer"
+                  onClick={() => navigate("/edit/" + postId)}
+                >
                   <BiEdit />
                 </p>
-                <p>
+                <p className="cursor-pointer" onClick={handleDeletePost}>
                   <MdDelete />
                 </p>
               </div>
@@ -66,10 +86,9 @@ function PostDetails() {
             </div>
           </div>
           <img
-            src={post.photo}
+            src={ImageFolder + post.photo}
             className="w-full mx-auto mt-8"
             alt=""
-            loading="lazy"
           />
           <p className="mx-auto mt-8  font-thin"> {post.description} </p>
           <div className="flex items-center mt-8 space-x-4 font-semibold ">

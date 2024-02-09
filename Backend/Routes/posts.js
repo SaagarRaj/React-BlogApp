@@ -34,9 +34,10 @@ router.put("/:id", verifyToken, async (req, res) => {
 router.delete("/:id", verifyToken, async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
-    res.sendStatus(200).json("Post has been deleted ");
-  } catch (error) {
-    res.status(500).json(error);
+    //await Comment.deleteMany({ postId: req.params.id });
+    res.status(200).json("Post has been deleted!");
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
+import { ImageFolder } from "../Url";
 const HomePosts = ({ post }) => {
   return (
     <div className="w-full flex mt-10 space-x-4 font-poppins font-thin">
       {/** Left Div*/}
       <div className="w-[35%] h-[250px] flex justify-center items-center">
-        <img alt="" src={post.photo} className="h-full w-full object-cover" />
+        <img
+          alt=""
+          src={ImageFolder + post.photo}
+          className="h-full w-full object-cover"
+        />
       </div>
       {/*Right div */}
       <div className="flex flex-col w-[65%] ">
