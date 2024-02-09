@@ -3,6 +3,8 @@ import { UserContext } from "../context/UserContext";
 import { Url } from "../Url";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 const Menu = () => {
   const { user } = useContext(UserContext);
   const { setUser } = useContext(UserContext);
@@ -21,17 +23,17 @@ const Menu = () => {
     }
   };
   return (
-    <div className="bg-black w-[200px] flex flex-col items-start absolute top-12 right-6 rounded-md p-4 space-y-4 md:right-32">
+    <div className="bg-black z-10 w-[200px] flex flex-col items-start absolute top-12 right-6 rounded-md p-4 space-y-4 md:right-32">
       {user ? (
         <>
           <h3 className="text-white text-sm hover:text-gray-500 font-thin cursor-pointer ">
-            Profile
+            <Link to={"/profile/" + user._id}> Profile </Link>
           </h3>
           <h3 className="text-white text-sm hover:text-gray-500 font-thin cursor-pointer ">
-            Write
+            <Link to="/write">Write</Link>
           </h3>
           <h3 className="text-white text-sm hover:text-gray-500 font-thin cursor-pointer">
-            My Blogs
+            <Link to={"/myblogs/" + user._id}>My blogs</Link>
           </h3>
           <h3
             onClick={handleLogout}
@@ -43,10 +45,10 @@ const Menu = () => {
       ) : (
         <>
           <h3 className="text-white text-sm hover:text-gray-500 font-thin cursor-pointer">
-            Login
+            <Link to="/login">Login</Link>
           </h3>
           <h3 className="text-white text-sm hover:text-gray-500 font-thin cursor-pointer ">
-            Register
+            <Link to="/register">Register</Link>
           </h3>
         </>
       )}

@@ -5,6 +5,7 @@ import axios from "axios";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 
+// eslint-disable-next-line no-unused-vars
 const Comment = ({ c, post }) => {
   const { user } = useContext(UserContext);
   const handleDelete = async (id) => {

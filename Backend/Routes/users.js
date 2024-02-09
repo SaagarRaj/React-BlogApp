@@ -40,6 +40,9 @@ router.delete("/:id", verifyToken, async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+    /*After retrieving the user data, the code destructures the user._doc object to extract all properties except the password. 
+    This is achieved using object destructuring with the rest/spread syntax (...). The password property is excluded from the 
+    extracted properties to prevent it from being sent to the client. */
     const { password, ...info } = user._doc;
     res.status(200).json(info);
   } catch (error) {

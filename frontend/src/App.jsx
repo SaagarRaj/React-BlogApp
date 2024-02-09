@@ -7,6 +7,7 @@ import CreatePost from "./pages/CreatePost";
 import EditPosts from "./pages/EditPosts";
 import Profile from "./pages/Profile";
 import { UserContextProvider } from "./context/UserContext";
+import MyBlogs from "./pages/MyBlogs";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/write" element={<CreatePost />} />
         <Route path="/edit/:id" element={<EditPosts />} />
+        <Route path="/myblogs/:id" element={<MyBlogs />} />
         <Route path="/posts/post/:id" element={<PostDetails />} />
         <Route path="/profile/:id" element={<Profile />} />
       </Routes>
