@@ -24,7 +24,7 @@ router.put("/:id", verifyToken, async (req, res) => {
       { $set: req.body },
       { new: true }
     );
-    res.sendStatus(200).json(updatedPost);
+    res.status(200).json(updatedPost);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -46,8 +46,8 @@ router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     res.status(200).json(post);
-  } catch (error) {
-    res.status(500).json(error);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

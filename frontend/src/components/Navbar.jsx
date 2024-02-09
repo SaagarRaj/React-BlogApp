@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { IoSearch } from "react-icons/io5";
+import { BsSearch } from "react-icons/bs";
 import { FaBars } from "react-icons/fa6";
 import { useContext, useState } from "react";
 import Menu from "./Menu";
@@ -8,7 +8,7 @@ const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const [prompt, setPrompt] = useState("");
   const { user } = useContext(UserContext);
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   // to get url/Pathname
   const path = useLocation().pathname;
 
@@ -16,21 +16,21 @@ const Navbar = () => {
   const showMenu = () => {
     setMenu(!menu);
   };
-  console.log(prompt);
+  //console.log(prompt);
   return (
-    <div className="flex items-center justify-between px-6 md:px-[200px] py-4 font-family-poppins ">
-      <h1 className="text-xl font-extrabold">
+    <div className="flex items-center justify-between px-6 md:px-[200px] py-4">
+      <h1 className="text-lg md:text-xl font-extrabold">
         <Link to="/">Blog Market</Link>
       </h1>
       {path === "/" && (
         <div className="flex justify-center items-center space-x-0">
           <p
             onClick={() =>
-              Navigate(prompt ? "?search=" + prompt : Navigate("/"))
+              navigate(prompt ? "?search=" + prompt : navigate("/"))
             }
             className="cursor-pointer"
           >
-            <IoSearch />
+            <BsSearch />
           </p>
           <input
             onChange={(e) => setPrompt(e.target.value)}
@@ -40,17 +40,14 @@ const Navbar = () => {
           />
         </div>
       )}
-      <div className="hidden md:flex items-center justify-center space-x-2 md:space-x-4 ">
-        {" "}
-        {/* on medium screen the display is set to flex from hidden  */}
+      <div className="hidden md:flex items-center justify-center space-x-2 md:space-x-4">
         {user ? (
           <h3>
             <Link to="/write">Write</Link>
           </h3>
         ) : (
           <h3>
-            {" "}
-            <Link to="/login">Login</Link>{" "}
+            <Link to="/login">Login</Link>
           </h3>
         )}
         {user ? (
